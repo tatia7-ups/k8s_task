@@ -22,8 +22,8 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/legal-term-api:${{ github.sha }},${{ secrets.DOCKER_USERNAME }}/legal-term-api:latest
       - name: Update Kubernetes manifests
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
+          git config --global user.name "tatia7-ups"
+          git config --global user.email "tatia.siria@gmail.com"
           git remote set-url origin https://tatia7-ups:${{ secrets.GH_PAT }}@github.com/tatia7-ups/k8s_task.git
           sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/legal-term-api:${{ github.sha }}|" k8s/deployment.yaml
           git commit -am "Update image tag to ${{ github.sha }}"
