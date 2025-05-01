@@ -59,7 +59,7 @@ Logs: kubectl logs -l app=legal-term-api
 Service: kubectl get services
 Ingress: kubectl get ingress
 HPA: kubectl get hpa
-Health Checks: Liveness/readiness probes on /health.
+Health Checks: Liveness/readiness probes on /docs.
 
 Security
 
@@ -76,8 +76,6 @@ Multiple replicas ensure resilience.
 Notes
 
 Local testing uses Minikube with local images for cost-free development.
-Assumes /health endpoint;
-adjust probes if the application uses a different health check.
 CI/CD pipeline automates image builds and manifest updates, 
 with manual application for local Minikube testing.
 
