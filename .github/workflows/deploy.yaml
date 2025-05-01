@@ -21,13 +21,12 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/legal-term-api:${{ github.sha }},${{ secrets.DOCKER_USERNAME }}/legal-term-api:latest
       - name: Update Kubernetes manifests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/legal-term-api:${{ github.sha }}|" k8s/deployment.yaml
           git commit -am "Update image tag to ${{ github.sha }}"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+          git push
+        if: github.event_name == 'push'
