@@ -1,20 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: legal-term-api-deployment
+  name: legal-term-api
 spec:
- replicas: 1
- selector:
-  matchLabels:
-    app: legal-term-api
- template:
-  metadata:
-    labels:
-     app: legal-term-api
-  spec:
-    containers:
-    - name: legal-term-api
-      image: tatia7/legal-term-api:1f12a885f5359ba003b917bc50130886934b249e
-      imagePullPolicy: IfNotPresent
-      ports:
-      - containerPort: 8000 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: legal-term-api
+  template:
+    metadata:
+      labels:
+        app: legal-term-api
+    spec:
+      containers:
+      - name: legal-term-api
+        image: tatia7-ups/legal-term-api:0e569211a9f462294fe48d7b8ca6b5c8ae1366a2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /docs
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /docs
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
