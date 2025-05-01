@@ -13,5 +13,7 @@ COPY . /app
 
 EXPOSE 8000
 
+USER 1000
+
 CMD ["poetry", "run", "uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8000"]
 
