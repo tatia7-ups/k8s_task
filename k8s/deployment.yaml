@@ -14,7 +14,7 @@ spec:
   spec:
     containers:
     - name: legal-term-api
-      image: tatia7/legal-term-api:21f64e7321ad8f91eb0e3e28a964ada310fa5470
+      image: tatia7/legal-term-api:770835483087e018dcb784330734c432467ccb98
       imagePullPolicy: IfNotPresent
       ports:
       - containerPort: 8000 
